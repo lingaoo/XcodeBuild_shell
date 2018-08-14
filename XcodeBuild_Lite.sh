@@ -18,7 +18,7 @@ CODE_SIGN_IDENTITY="iPhone Distribution: XXXXXXXX"
 PROVISIONING_PROFILE="a1687532-903b-XXXXXX-XXXXXXXXXX"
 
 # 不同文件的值
-echo -n "Enter $APP_NAME IPA Type( Sit / Product ):"
+echo -n "Enter any key continua："
 read TYPE
 
 MODE="Test"
@@ -41,7 +41,7 @@ xcodebuild -target $PROJECTNAME clean
 
 XCWORKSPACE=$PROJECTNAME".xcworkspace"
 
-xcodebuild archive -workspace $XCWORKSPACE  -scheme $PROJECTNAME -configuration $MODE -archivePath $FileArchivePath CODE_SIGN_IDENTITY="iPhone Distribution: XXXXXXXXXXXXXXXXX" PROVISIONING_PROFILE=$PROVISIONING_PROFILE
+xcodebuild archive -workspace $XCWORKSPACE  -scheme $PROJECTNAME -configuration $MODE -archivePath $FileArchivePath CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${PROVISIONING_PROFILE}"
 
 echo '准备生成ipa'
 
@@ -58,6 +58,7 @@ mv $FILEPATH'/'$PROJECTNAME'-IPA/'$DICName"/"$PROJECTNAME".ipa" $FileIPAPath
 
 if test -e $FileIPAPath ;then
 echo '构建成功'
+exit 0
 else
 echo "构建失败"
 exit 1
